@@ -9,3 +9,6 @@
 # Documentation here: https://yarnpkg.com/features/zero-installs
 !.yarn/cache
 #.pnp.*
+
+# Keep environment variables out of version control
+.env

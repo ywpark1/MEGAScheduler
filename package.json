@@ -1,17 +1,32 @@
 {
   "name": "MEGAScheduler",
   "packageManager": "yarn@3.2.1",
+  "scripts": {
+    "dev": "tsnd --respawn --transpile-only --exit-child ./src/app.ts",
+    "debug": "tsnd --transpile-only --respawn --inspect=4321 --exit-child --project tsconfig.json ./src/app.ts"
+  },
   "dependencies": {
+    "@fastify/jwt": "^6.3.1",
+    "@fastify/swagger": "^7.4.1",
     "@prisma/client": "^4.0.0",
     "fastify": "^4.2.0",
-    "fastify-jwt": "^4.2.0",
     "fastify-zod": "^1.0.2",
     "zod": "^3.17.3",
     "zod-to-json-schema": "^3.17.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.3",
+    "@yarnpkg/pnpify": "^4.0.0-rc.12",
+    "prisma": "4.0.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.4"
+  },
+  "dependenciesMeta": {
+    "@prisma/client@4.0.0": {
+      "unplugged": true
+    },
+    "prisma@4.0.0": {
+      "unplugged": true
+    }
   }
 }
