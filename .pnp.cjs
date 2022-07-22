@@ -33,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@fastify/env", "npm:4.0.0"],\
             ["@fastify/jwt", "npm:6.3.1"],\
             ["@fastify/swagger", "npm:7.4.1"],\
             ["@prisma/client", "virtual:4f352a69bbfb9eaa375d58bfadc4cbd5ac30adc6023d5df176c34ccfbef6d5af619bb5b4341eae84dd060d9122ea00e00ba03252c628d5cb85d67f464077959f#npm:4.0.0"],\
@@ -77,6 +78,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ajv", "npm:8.11.0"],\
             ["ajv-formats", "virtual:21331d6190c6193955da3a4ca90d3270943d62e7ec8cc225ca6acae1401f65e544956e877c6c1799c6cc6b05078dc1cc459260eb3d2a2ab2b3356b8094026966#npm:2.1.1"],\
             ["fast-uri", "npm:2.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@fastify/env", [\
+        ["npm:4.0.0", {\
+          "packageLocation": "./.yarn/cache/@fastify-env-npm-4.0.0-3d07da37cd-99237c850e.zip/node_modules/@fastify/env/",\
+          "packageDependencies": [\
+            ["@fastify/env", "npm:4.0.0"],\
+            ["env-schema", "npm:4.0.0"],\
+            ["fastify-plugin", "npm:3.0.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -739,6 +751,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["MEGAScheduler", "workspace:."],\
+            ["@fastify/env", "npm:4.0.0"],\
             ["@fastify/jwt", "npm:6.3.1"],\
             ["@fastify/swagger", "npm:7.4.1"],\
             ["@prisma/client", "virtual:4f352a69bbfb9eaa375d58bfadc4cbd5ac30adc6023d5df176c34ccfbef6d5af619bb5b4341eae84dd060d9122ea00e00ba03252c628d5cb85d67f464077959f#npm:4.0.0"],\
@@ -1705,6 +1718,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["dotenv", [\
+        ["npm:16.0.1", {\
+          "packageLocation": "./.yarn/cache/dotenv-npm-16.0.1-d99e72bb95-f459ffce07.zip/node_modules/dotenv/",\
+          "packageDependencies": [\
+            ["dotenv", "npm:16.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dotenv-expand", [\
+        ["npm:8.0.3", {\
+          "packageLocation": "./.yarn/cache/dotenv-expand-npm-8.0.3-3f30d1947a-128ce90ac8.zip/node_modules/dotenv-expand/",\
+          "packageDependencies": [\
+            ["dotenv-expand", "npm:8.0.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["dynamic-dedupe", [\
         ["npm:0.3.0", {\
           "packageLocation": "./.yarn/cache/dynamic-dedupe-npm-0.3.0-2bd097ed43-5178b99ad3.zip/node_modules/dynamic-dedupe/",\
@@ -1796,6 +1827,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/env-paths-npm-2.2.1-7c7577428c-65b5df55a8.zip/node_modules/env-paths/",\
           "packageDependencies": [\
             ["env-paths", "npm:2.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["env-schema", [\
+        ["npm:4.0.0", {\
+          "packageLocation": "./.yarn/cache/env-schema-npm-4.0.0-7f5479f343-e396933c9b.zip/node_modules/env-schema/",\
+          "packageDependencies": [\
+            ["env-schema", "npm:4.0.0"],\
+            ["ajv", "npm:8.11.0"],\
+            ["dotenv", "npm:16.0.1"],\
+            ["dotenv-expand", "npm:8.0.3"]\
           ],\
           "linkType": "HARD"\
         }]\

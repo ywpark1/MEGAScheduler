@@ -6,6 +6,7 @@
     "debug": "tsnd --transpile-only --respawn --inspect=4321 --exit-child --project tsconfig.json ./src/app.ts"
   },
   "dependencies": {
+    "@fastify/env": "^4.0.0",
     "@fastify/jwt": "^6.3.1",
     "@fastify/swagger": "^7.4.1",
     "@prisma/client": "^4.0.0",
