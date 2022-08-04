@@ -1,0 +1,85 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int           @id @default(autoincrement())
+  email         String        @unique
+  phoneNumber   String        @unique
+  password      String
+  salt          String
+  kakaoID       String?
+  isBlacklisted Boolean       @default(false)
+  role          Role          @default(CLIENT)
+  appointments  Appointment[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  ReportUser    ReportUser[]
+}
+
+enum Role {
+  CLIENT
+  ADMIN
+}
+
+model Appointment {
+  id                Int                @id @default(autoincrement())
+  datetimeFrom      DateTime
+  datetimeTo        DateTime
+  user              User               @relation(fields: [userEmail], references: [email])
+  userEmail         String
+  calendarEventId   String
+  status            AppointmentStatus  @default(NOT_STARTED)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  AppointmentDetail AppointmentDetail?
+}
+
+enum AppointmentStatus {
+  NOT_STARTED
+  COMPLETED
+  CANCELLED
+}
+
+model AppointmentDetail {
+  id              Int         @id @default(autoincrement())
+  appointment     Appointment @relation(fields: [appointmentId], references: [id])
+  appointmentId   Int         @unique
+  comments        String?
+  appointmentType String
+  paidAmount      Float?
+  paidDate        DateTime?
+}
+
+model Report {
+  id                        Int          @id @default(autoincrement())
+  fileName                  String
+  datetimeFrom              DateTime
+  datetimeTo                DateTime
+  totalUsers                Int
+  totalAmount               Float
+  totalHours                Float
+  totalAppointmentBooked    Int
+  totalAppointmentCancelled Int
+  reportUsers               ReportUser[]
+}
+
+model ReportUser {
+  Report                    Report? @relation(fields: [reportId], references: [id])
+  reportId                  Int     @unique
+  user                      User    @relation(fields: [userEmail], references: [email])
+  userEmail                 String
+  totalAmount               Float
+  totalHours                Float
+  appointmentBookedCount    Int
+  appointmentCancelledCount Int
+}
