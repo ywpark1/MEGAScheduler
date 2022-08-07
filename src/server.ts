@@ -3,6 +3,7 @@ import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import Fastify from "fastify";
 import { bootstrap } from "fastify-decorators";
 import AppointmentController from "./modules/appointment/appointment.controller";
+import ReportController from "./modules/report/report.controller";
 
 import UserController from "./modules/user/user.controller";
 
@@ -44,7 +45,7 @@ function buildServer() {
 
   // Register handlers auto-bootstrap
   server.register(bootstrap, {
-    controllers: [UserController, AppointmentController],
+    controllers: [UserController, AppointmentController, ReportController],
   });
 
   return server;

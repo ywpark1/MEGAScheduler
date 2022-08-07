@@ -28,6 +28,41 @@ export class AppointmentService {
     });
   }
 
+  public async findAppointmentsWithDateFilter(
+    datetimeFrom: string,
+    datetimeTo: string
+  ) {
+    return prisma.appointment.findMany({
+      select: {
+        id: true,
+        datetimeFrom: true,
+        datetimeTo: true,
+        user: {
+          select: {
+            email: true,
+            phoneNumber: true,
+            kakaoID: true,
+          },
+        },
+        status: true,
+        AppointmentDetail: {
+          select: {
+            comments: true,
+            appointmentType: true,
+          },
+        },
+      },
+      where: {
+        datetimeFrom: {
+          gte: datetimeFrom,
+        },
+        datetimeTo: {
+          lte: datetimeTo,
+        },
+      },
+    });
+  }
+
   public async createNewAppointment(
     newAppointment: CreateAppointmentInputType,
     calendarEventId: string

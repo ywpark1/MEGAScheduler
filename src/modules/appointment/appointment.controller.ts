@@ -110,7 +110,7 @@ export default class AppointmentController {
           return reply.code(201).send(appointment);
         }
       } catch (error: any) {
-        this.logger.message(`${error.meta.cause}`, LogLevel.INFO);
+        this.logger.message(`${error.meta}`, LogLevel.ERROR);
 
         await this._calendarService.cancelEvent(calendarId, newEvent.id);
       }
