@@ -50,7 +50,7 @@ class FileLogger extends Logger {
   public write_message(msg: string, logLevel: LogLevel) {
     fs.appendFile(
       "log.txt",
-      `${new Date().toISOString()} - FileLogger => [${logLevel}] ${msg}`,
+      `${new Date().toISOString()} - FileLogger => [${logLevel}] ${msg}\n`,
       (err) => {
         if (err) {
           console.log(err);
