@@ -1,4 +1,6 @@
 import { Service } from "fastify-decorators";
+import { AppointmentStatus } from "../../generated/client";
+import { getAppointmentHours } from "../../utils/datetime";
 import prisma from "../../utils/prisma";
 import { CreateAppointmentInputType } from "./appointment";
 
@@ -32,26 +34,8 @@ export class AppointmentService {
     datetimeFrom: string,
     datetimeTo: string
   ) {
-    return prisma.appointment.findMany({
-      select: {
-        id: true,
-        datetimeFrom: true,
-        datetimeTo: true,
-        user: {
-          select: {
-            email: true,
-            phoneNumber: true,
-            kakaoID: true,
-          },
-        },
-        status: true,
-        AppointmentDetail: {
-          select: {
-            comments: true,
-            appointmentType: true,
-          },
-        },
-      },
+    return prisma.appointment.groupBy({
+      by: ["userEmail", "status"],
       where: {
         datetimeFrom: {
           gte: datetimeFrom,
@@ -59,6 +43,10 @@ export class AppointmentService {
         datetimeTo: {
           lte: datetimeTo,
         },
+      },
+      _count: true,
+      _sum: {
+        totalHours: true,
       },
     });
   }
@@ -68,11 +56,15 @@ export class AppointmentService {
     calendarEventId: string
   ) {
     const { datetimeFrom, datetimeTo, userEmail, ...rest } = newAppointment;
+    const totalHours = getAppointmentHours(
+      Date.parse(datetimeTo) - Date.parse(datetimeFrom)
+    );
     const appointment = await prisma.appointment.create({
       data: {
         datetimeFrom,
         datetimeTo,
         calendarEventId,
+        totalHours,
         user: {
           connect: {
             email: userEmail,
@@ -128,6 +120,32 @@ export class AppointmentService {
           select: {
             comments: true,
             appointmentType: true,
+          },
+        },
+      },
+    });
+  }
+
+  public async updateAppointmentStatus(id: number, status: string) {
+    return await prisma.appointment.update({
+      where: {
+        id,
+      },
+      data: {
+        status: AppointmentStatus[status as keyof typeof AppointmentStatus],
+      },
+      select: {
+        datetimeFrom: true,
+        datetimeTo: true,
+        totalHours: true,
+        userEmail: true,
+        status: true,
+        AppointmentDetail: {
+          select: {
+            comments: true,
+            appointmentType: true,
+            paidAmount: true,
+            paidDate: true,
           },
         },
       },

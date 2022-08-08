@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { Controller, GET, Inject, POST } from "fastify-decorators";
+import { Controller, DELETE, GET, Inject, POST } from "fastify-decorators";
 import { getLogger, Logger, LogLevel } from "../../log/logger";
 import { CreateReportInputType } from "./report";
 import { CreateReportCore } from "./report.schema";
@@ -30,6 +30,34 @@ export default class ReportController {
       datetimeTo
     );
 
-    this.logger.message(JSON.stringify(newReport), LogLevel.INFO);
+    return reply.code(200).send(newReport);
+  }
+  @GET("/:id", {})
+  public async getReport(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.params;
+    this.logger.message(`Retrieve report id - ${id}`, LogLevel.INFO);
+
+    const report = await this._reportService.getReport(id);
+
+    return reply.code(200).send(report);
+  }
+
+  @GET("/", {})
+  public async getReports(request: FastifyRequest, reply: FastifyReply) {
+    this.logger.message(`Retrieve all reports`, LogLevel.INFO);
+
+    const report = await this._reportService.getReports();
+
+    return reply.code(200).send(report);
+  }
+
+  @DELETE("/:id", {})
+  public async deleteReport(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.params;
+    this.logger.message(`Delete report id - ${id}`, LogLevel.INFO);
+
+    const report = await this._reportService.deleteReport(id);
+
+    return reply.code(200);
   }
 }

@@ -100,6 +100,7 @@ exports.Prisma.AppointmentScalarFieldEnum = makeEnum({
   id: 'id',
   datetimeFrom: 'datetimeFrom',
   datetimeTo: 'datetimeTo',
+  totalHours: 'totalHours',
   userEmail: 'userEmail',
   calendarEventId: 'calendarEventId',
   status: 'status',
@@ -111,9 +112,7 @@ exports.Prisma.AppointmentDetailScalarFieldEnum = makeEnum({
   id: 'id',
   appointmentId: 'appointmentId',
   comments: 'comments',
-  appointmentType: 'appointmentType',
-  paidAmount: 'paidAmount',
-  paidDate: 'paidDate'
+  appointmentType: 'appointmentType'
 });
 
 exports.Prisma.ReportScalarFieldEnum = makeEnum({
@@ -122,16 +121,15 @@ exports.Prisma.ReportScalarFieldEnum = makeEnum({
   datetimeFrom: 'datetimeFrom',
   datetimeTo: 'datetimeTo',
   totalUsers: 'totalUsers',
-  totalAmount: 'totalAmount',
   totalHours: 'totalHours',
   totalAppointmentBooked: 'totalAppointmentBooked',
   totalAppointmentCancelled: 'totalAppointmentCancelled'
 });
 
 exports.Prisma.ReportUserScalarFieldEnum = makeEnum({
+  id: 'id',
   reportId: 'reportId',
   userEmail: 'userEmail',
-  totalAmount: 'totalAmount',
   totalHours: 'totalHours',
   appointmentBookedCount: 'appointmentBookedCount',
   appointmentCancelledCount: 'appointmentCancelledCount'

@@ -37,6 +37,7 @@ export type Appointment = {
   id: number
   datetimeFrom: Date
   datetimeTo: Date
+  totalHours: number
   userEmail: string
   calendarEventId: string
   status: AppointmentStatus
@@ -53,8 +54,6 @@ export type AppointmentDetail = {
   appointmentId: number
   comments: string | null
   appointmentType: string
-  paidAmount: number | null
-  paidDate: Date | null
 }
 
 /**
@@ -67,7 +66,6 @@ export type Report = {
   datetimeFrom: Date
   datetimeTo: Date
   totalUsers: number
-  totalAmount: number
   totalHours: number
   totalAppointmentBooked: number
   totalAppointmentCancelled: number
@@ -78,9 +76,9 @@ export type Report = {
  * 
  */
 export type ReportUser = {
+  id: number
   reportId: number
   userEmail: string
-  totalAmount: number
   totalHours: number
   appointmentBookedCount: number
   appointmentCancelledCount: number
@@ -2055,16 +2053,19 @@ export namespace Prisma {
 
   export type AppointmentAvgAggregateOutputType = {
     id: number | null
+    totalHours: number | null
   }
 
   export type AppointmentSumAggregateOutputType = {
     id: number | null
+    totalHours: number | null
   }
 
   export type AppointmentMinAggregateOutputType = {
     id: number | null
     datetimeFrom: Date | null
     datetimeTo: Date | null
+    totalHours: number | null
     userEmail: string | null
     calendarEventId: string | null
     status: AppointmentStatus | null
@@ -2076,6 +2077,7 @@ export namespace Prisma {
     id: number | null
     datetimeFrom: Date | null
     datetimeTo: Date | null
+    totalHours: number | null
     userEmail: string | null
     calendarEventId: string | null
     status: AppointmentStatus | null
@@ -2087,6 +2089,7 @@ export namespace Prisma {
     id: number
     datetimeFrom: number
     datetimeTo: number
+    totalHours: number
     userEmail: number
     calendarEventId: number
     status: number
@@ -2098,16 +2101,19 @@ export namespace Prisma {
 
   export type AppointmentAvgAggregateInputType = {
     id?: true
+    totalHours?: true
   }
 
   export type AppointmentSumAggregateInputType = {
     id?: true
+    totalHours?: true
   }
 
   export type AppointmentMinAggregateInputType = {
     id?: true
     datetimeFrom?: true
     datetimeTo?: true
+    totalHours?: true
     userEmail?: true
     calendarEventId?: true
     status?: true
@@ -2119,6 +2125,7 @@ export namespace Prisma {
     id?: true
     datetimeFrom?: true
     datetimeTo?: true
+    totalHours?: true
     userEmail?: true
     calendarEventId?: true
     status?: true
@@ -2130,6 +2137,7 @@ export namespace Prisma {
     id?: true
     datetimeFrom?: true
     datetimeTo?: true
+    totalHours?: true
     userEmail?: true
     calendarEventId?: true
     status?: true
@@ -2234,6 +2242,7 @@ export namespace Prisma {
     id: number
     datetimeFrom: Date
     datetimeTo: Date
+    totalHours: number
     userEmail: string
     calendarEventId: string
     status: AppointmentStatus
@@ -2264,6 +2273,7 @@ export namespace Prisma {
     id?: boolean
     datetimeFrom?: boolean
     datetimeTo?: boolean
+    totalHours?: boolean
     user?: boolean | UserArgs
     userEmail?: boolean
     calendarEventId?: boolean
@@ -3042,13 +3052,11 @@ export namespace Prisma {
   export type AppointmentDetailAvgAggregateOutputType = {
     id: number | null
     appointmentId: number | null
-    paidAmount: number | null
   }
 
   export type AppointmentDetailSumAggregateOutputType = {
     id: number | null
     appointmentId: number | null
-    paidAmount: number | null
   }
 
   export type AppointmentDetailMinAggregateOutputType = {
@@ -3056,8 +3064,6 @@ export namespace Prisma {
     appointmentId: number | null
     comments: string | null
     appointmentType: string | null
-    paidAmount: number | null
-    paidDate: Date | null
   }
 
   export type AppointmentDetailMaxAggregateOutputType = {
@@ -3065,8 +3071,6 @@ export namespace Prisma {
     appointmentId: number | null
     comments: string | null
     appointmentType: string | null
-    paidAmount: number | null
-    paidDate: Date | null
   }
 
   export type AppointmentDetailCountAggregateOutputType = {
@@ -3074,8 +3078,6 @@ export namespace Prisma {
     appointmentId: number
     comments: number
     appointmentType: number
-    paidAmount: number
-    paidDate: number
     _all: number
   }
 
@@ -3083,13 +3085,11 @@ export namespace Prisma {
   export type AppointmentDetailAvgAggregateInputType = {
     id?: true
     appointmentId?: true
-    paidAmount?: true
   }
 
   export type AppointmentDetailSumAggregateInputType = {
     id?: true
     appointmentId?: true
-    paidAmount?: true
   }
 
   export type AppointmentDetailMinAggregateInputType = {
@@ -3097,8 +3097,6 @@ export namespace Prisma {
     appointmentId?: true
     comments?: true
     appointmentType?: true
-    paidAmount?: true
-    paidDate?: true
   }
 
   export type AppointmentDetailMaxAggregateInputType = {
@@ -3106,8 +3104,6 @@ export namespace Prisma {
     appointmentId?: true
     comments?: true
     appointmentType?: true
-    paidAmount?: true
-    paidDate?: true
   }
 
   export type AppointmentDetailCountAggregateInputType = {
@@ -3115,8 +3111,6 @@ export namespace Prisma {
     appointmentId?: true
     comments?: true
     appointmentType?: true
-    paidAmount?: true
-    paidDate?: true
     _all?: true
   }
 
@@ -3217,8 +3211,6 @@ export namespace Prisma {
     appointmentId: number
     comments: string | null
     appointmentType: string
-    paidAmount: number | null
-    paidDate: Date | null
     _count: AppointmentDetailCountAggregateOutputType | null
     _avg: AppointmentDetailAvgAggregateOutputType | null
     _sum: AppointmentDetailSumAggregateOutputType | null
@@ -3246,8 +3238,6 @@ export namespace Prisma {
     appointmentId?: boolean
     comments?: boolean
     appointmentType?: boolean
-    paidAmount?: boolean
-    paidDate?: boolean
   }
 
   export type AppointmentDetailInclude = {
@@ -4014,7 +4004,6 @@ export namespace Prisma {
   export type ReportAvgAggregateOutputType = {
     id: number | null
     totalUsers: number | null
-    totalAmount: number | null
     totalHours: number | null
     totalAppointmentBooked: number | null
     totalAppointmentCancelled: number | null
@@ -4023,7 +4012,6 @@ export namespace Prisma {
   export type ReportSumAggregateOutputType = {
     id: number | null
     totalUsers: number | null
-    totalAmount: number | null
     totalHours: number | null
     totalAppointmentBooked: number | null
     totalAppointmentCancelled: number | null
@@ -4035,7 +4023,6 @@ export namespace Prisma {
     datetimeFrom: Date | null
     datetimeTo: Date | null
     totalUsers: number | null
-    totalAmount: number | null
     totalHours: number | null
     totalAppointmentBooked: number | null
     totalAppointmentCancelled: number | null
@@ -4047,7 +4034,6 @@ export namespace Prisma {
     datetimeFrom: Date | null
     datetimeTo: Date | null
     totalUsers: number | null
-    totalAmount: number | null
     totalHours: number | null
     totalAppointmentBooked: number | null
     totalAppointmentCancelled: number | null
@@ -4059,7 +4045,6 @@ export namespace Prisma {
     datetimeFrom: number
     datetimeTo: number
     totalUsers: number
-    totalAmount: number
     totalHours: number
     totalAppointmentBooked: number
     totalAppointmentCancelled: number
@@ -4070,7 +4055,6 @@ export namespace Prisma {
   export type ReportAvgAggregateInputType = {
     id?: true
     totalUsers?: true
-    totalAmount?: true
     totalHours?: true
     totalAppointmentBooked?: true
     totalAppointmentCancelled?: true
@@ -4079,7 +4063,6 @@ export namespace Prisma {
   export type ReportSumAggregateInputType = {
     id?: true
     totalUsers?: true
-    totalAmount?: true
     totalHours?: true
     totalAppointmentBooked?: true
     totalAppointmentCancelled?: true
@@ -4091,7 +4074,6 @@ export namespace Prisma {
     datetimeFrom?: true
     datetimeTo?: true
     totalUsers?: true
-    totalAmount?: true
     totalHours?: true
     totalAppointmentBooked?: true
     totalAppointmentCancelled?: true
@@ -4103,7 +4085,6 @@ export namespace Prisma {
     datetimeFrom?: true
     datetimeTo?: true
     totalUsers?: true
-    totalAmount?: true
     totalHours?: true
     totalAppointmentBooked?: true
     totalAppointmentCancelled?: true
@@ -4115,7 +4096,6 @@ export namespace Prisma {
     datetimeFrom?: true
     datetimeTo?: true
     totalUsers?: true
-    totalAmount?: true
     totalHours?: true
     totalAppointmentBooked?: true
     totalAppointmentCancelled?: true
@@ -4220,7 +4200,6 @@ export namespace Prisma {
     datetimeFrom: Date
     datetimeTo: Date
     totalUsers: number
-    totalAmount: number
     totalHours: number
     totalAppointmentBooked: number
     totalAppointmentCancelled: number
@@ -4251,7 +4230,6 @@ export namespace Prisma {
     datetimeFrom?: boolean
     datetimeTo?: boolean
     totalUsers?: boolean
-    totalAmount?: boolean
     totalHours?: boolean
     totalAppointmentBooked?: boolean
     totalAppointmentCancelled?: boolean
@@ -5024,43 +5002,43 @@ export namespace Prisma {
   }
 
   export type ReportUserAvgAggregateOutputType = {
+    id: number | null
     reportId: number | null
-    totalAmount: number | null
     totalHours: number | null
     appointmentBookedCount: number | null
     appointmentCancelledCount: number | null
   }
 
   export type ReportUserSumAggregateOutputType = {
+    id: number | null
     reportId: number | null
-    totalAmount: number | null
     totalHours: number | null
     appointmentBookedCount: number | null
     appointmentCancelledCount: number | null
   }
 
   export type ReportUserMinAggregateOutputType = {
+    id: number | null
     reportId: number | null
     userEmail: string | null
-    totalAmount: number | null
     totalHours: number | null
     appointmentBookedCount: number | null
     appointmentCancelledCount: number | null
   }
 
   export type ReportUserMaxAggregateOutputType = {
+    id: number | null
     reportId: number | null
     userEmail: string | null
-    totalAmount: number | null
     totalHours: number | null
     appointmentBookedCount: number | null
     appointmentCancelledCount: number | null
   }
 
   export type ReportUserCountAggregateOutputType = {
+    id: number
     reportId: number
     userEmail: number
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
@@ -5069,43 +5047,43 @@ export namespace Prisma {
 
 
   export type ReportUserAvgAggregateInputType = {
+    id?: true
     reportId?: true
-    totalAmount?: true
     totalHours?: true
     appointmentBookedCount?: true
     appointmentCancelledCount?: true
   }
 
   export type ReportUserSumAggregateInputType = {
+    id?: true
     reportId?: true
-    totalAmount?: true
     totalHours?: true
     appointmentBookedCount?: true
     appointmentCancelledCount?: true
   }
 
   export type ReportUserMinAggregateInputType = {
+    id?: true
     reportId?: true
     userEmail?: true
-    totalAmount?: true
     totalHours?: true
     appointmentBookedCount?: true
     appointmentCancelledCount?: true
   }
 
   export type ReportUserMaxAggregateInputType = {
+    id?: true
     reportId?: true
     userEmail?: true
-    totalAmount?: true
     totalHours?: true
     appointmentBookedCount?: true
     appointmentCancelledCount?: true
   }
 
   export type ReportUserCountAggregateInputType = {
+    id?: true
     reportId?: true
     userEmail?: true
-    totalAmount?: true
     totalHours?: true
     appointmentBookedCount?: true
     appointmentCancelledCount?: true
@@ -5205,9 +5183,9 @@ export namespace Prisma {
 
 
   export type ReportUserGroupByOutputType = {
+    id: number
     reportId: number
     userEmail: string
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
@@ -5233,11 +5211,11 @@ export namespace Prisma {
 
 
   export type ReportUserSelect = {
+    id?: boolean
     Report?: boolean | ReportArgs
     reportId?: boolean
     user?: boolean | UserArgs
     userEmail?: boolean
-    totalAmount?: boolean
     totalHours?: boolean
     appointmentBookedCount?: boolean
     appointmentCancelledCount?: boolean
@@ -5323,8 +5301,8 @@ export namespace Prisma {
      * // Get first 10 ReportUsers
      * const reportUsers = await prisma.reportUser.findMany({ take: 10 })
      * 
-     * // Only select the `reportId`
-     * const reportUserWithReportIdOnly = await prisma.reportUser.findMany({ select: { reportId: true } })
+     * // Only select the `id`
+     * const reportUserWithIdOnly = await prisma.reportUser.findMany({ select: { id: true } })
      * 
     **/
     findMany<T extends ReportUserFindManyArgs>(
@@ -6023,6 +6001,7 @@ export namespace Prisma {
     id: 'id',
     datetimeFrom: 'datetimeFrom',
     datetimeTo: 'datetimeTo',
+    totalHours: 'totalHours',
     userEmail: 'userEmail',
     calendarEventId: 'calendarEventId',
     status: 'status',
@@ -6037,9 +6016,7 @@ export namespace Prisma {
     id: 'id',
     appointmentId: 'appointmentId',
     comments: 'comments',
-    appointmentType: 'appointmentType',
-    paidAmount: 'paidAmount',
-    paidDate: 'paidDate'
+    appointmentType: 'appointmentType'
   };
 
   export type AppointmentDetailScalarFieldEnum = (typeof AppointmentDetailScalarFieldEnum)[keyof typeof AppointmentDetailScalarFieldEnum]
@@ -6051,7 +6028,6 @@ export namespace Prisma {
     datetimeFrom: 'datetimeFrom',
     datetimeTo: 'datetimeTo',
     totalUsers: 'totalUsers',
-    totalAmount: 'totalAmount',
     totalHours: 'totalHours',
     totalAppointmentBooked: 'totalAppointmentBooked',
     totalAppointmentCancelled: 'totalAppointmentCancelled'
@@ -6061,9 +6037,9 @@ export namespace Prisma {
 
 
   export const ReportUserScalarFieldEnum: {
+    id: 'id',
     reportId: 'reportId',
     userEmail: 'userEmail',
-    totalAmount: 'totalAmount',
     totalHours: 'totalHours',
     appointmentBookedCount: 'appointmentBookedCount',
     appointmentCancelledCount: 'appointmentCancelledCount'
@@ -6173,6 +6149,7 @@ export namespace Prisma {
     id?: IntFilter | number
     datetimeFrom?: DateTimeFilter | Date | string
     datetimeTo?: DateTimeFilter | Date | string
+    totalHours?: FloatFilter | number
     user?: XOR<UserRelationFilter, UserWhereInput>
     userEmail?: StringFilter | string
     calendarEventId?: StringFilter | string
@@ -6186,6 +6163,7 @@ export namespace Prisma {
     id?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
+    totalHours?: SortOrder
     user?: UserOrderByWithRelationInput
     userEmail?: SortOrder
     calendarEventId?: SortOrder
@@ -6203,6 +6181,7 @@ export namespace Prisma {
     id?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
+    totalHours?: SortOrder
     userEmail?: SortOrder
     calendarEventId?: SortOrder
     status?: SortOrder
@@ -6222,6 +6201,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter | number
     datetimeFrom?: DateTimeWithAggregatesFilter | Date | string
     datetimeTo?: DateTimeWithAggregatesFilter | Date | string
+    totalHours?: FloatWithAggregatesFilter | number
     userEmail?: StringWithAggregatesFilter | string
     calendarEventId?: StringWithAggregatesFilter | string
     status?: EnumAppointmentStatusWithAggregatesFilter | AppointmentStatus
@@ -6238,8 +6218,6 @@ export namespace Prisma {
     appointmentId?: IntFilter | number
     comments?: StringNullableFilter | string | null
     appointmentType?: StringFilter | string
-    paidAmount?: FloatNullableFilter | number | null
-    paidDate?: DateTimeNullableFilter | Date | string | null
   }
 
   export type AppointmentDetailOrderByWithRelationInput = {
@@ -6248,8 +6226,6 @@ export namespace Prisma {
     appointmentId?: SortOrder
     comments?: SortOrder
     appointmentType?: SortOrder
-    paidAmount?: SortOrder
-    paidDate?: SortOrder
   }
 
   export type AppointmentDetailWhereUniqueInput = {
@@ -6262,8 +6238,6 @@ export namespace Prisma {
     appointmentId?: SortOrder
     comments?: SortOrder
     appointmentType?: SortOrder
-    paidAmount?: SortOrder
-    paidDate?: SortOrder
     _count?: AppointmentDetailCountOrderByAggregateInput
     _avg?: AppointmentDetailAvgOrderByAggregateInput
     _max?: AppointmentDetailMaxOrderByAggregateInput
@@ -6279,8 +6253,6 @@ export namespace Prisma {
     appointmentId?: IntWithAggregatesFilter | number
     comments?: StringNullableWithAggregatesFilter | string | null
     appointmentType?: StringWithAggregatesFilter | string
-    paidAmount?: FloatNullableWithAggregatesFilter | number | null
-    paidDate?: DateTimeNullableWithAggregatesFilter | Date | string | null
   }
 
   export type ReportWhereInput = {
@@ -6292,7 +6264,6 @@ export namespace Prisma {
     datetimeFrom?: DateTimeFilter | Date | string
     datetimeTo?: DateTimeFilter | Date | string
     totalUsers?: IntFilter | number
-    totalAmount?: FloatFilter | number
     totalHours?: FloatFilter | number
     totalAppointmentBooked?: IntFilter | number
     totalAppointmentCancelled?: IntFilter | number
@@ -6305,7 +6276,6 @@ export namespace Prisma {
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
     totalUsers?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
     totalAppointmentBooked?: SortOrder
     totalAppointmentCancelled?: SortOrder
@@ -6322,7 +6292,6 @@ export namespace Prisma {
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
     totalUsers?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
     totalAppointmentBooked?: SortOrder
     totalAppointmentCancelled?: SortOrder
@@ -6342,7 +6311,6 @@ export namespace Prisma {
     datetimeFrom?: DateTimeWithAggregatesFilter | Date | string
     datetimeTo?: DateTimeWithAggregatesFilter | Date | string
     totalUsers?: IntWithAggregatesFilter | number
-    totalAmount?: FloatWithAggregatesFilter | number
     totalHours?: FloatWithAggregatesFilter | number
     totalAppointmentBooked?: IntWithAggregatesFilter | number
     totalAppointmentCancelled?: IntWithAggregatesFilter | number
@@ -6352,35 +6320,35 @@ export namespace Prisma {
     AND?: Enumerable<ReportUserWhereInput>
     OR?: Enumerable<ReportUserWhereInput>
     NOT?: Enumerable<ReportUserWhereInput>
+    id?: IntFilter | number
     Report?: XOR<ReportRelationFilter, ReportWhereInput> | null
     reportId?: IntFilter | number
     user?: XOR<UserRelationFilter, UserWhereInput>
     userEmail?: StringFilter | string
-    totalAmount?: FloatFilter | number
     totalHours?: FloatFilter | number
     appointmentBookedCount?: IntFilter | number
     appointmentCancelledCount?: IntFilter | number
   }
 
   export type ReportUserOrderByWithRelationInput = {
+    id?: SortOrder
     Report?: ReportOrderByWithRelationInput
     reportId?: SortOrder
     user?: UserOrderByWithRelationInput
     userEmail?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
     appointmentBookedCount?: SortOrder
     appointmentCancelledCount?: SortOrder
   }
 
   export type ReportUserWhereUniqueInput = {
-    reportId?: number
+    id?: number
   }
 
   export type ReportUserOrderByWithAggregationInput = {
+    id?: SortOrder
     reportId?: SortOrder
     userEmail?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
     appointmentBookedCount?: SortOrder
     appointmentCancelledCount?: SortOrder
@@ -6395,9 +6363,9 @@ export namespace Prisma {
     AND?: Enumerable<ReportUserScalarWhereWithAggregatesInput>
     OR?: Enumerable<ReportUserScalarWhereWithAggregatesInput>
     NOT?: Enumerable<ReportUserScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
     reportId?: IntWithAggregatesFilter | number
     userEmail?: StringWithAggregatesFilter | string
-    totalAmount?: FloatWithAggregatesFilter | number
     totalHours?: FloatWithAggregatesFilter | number
     appointmentBookedCount?: IntWithAggregatesFilter | number
     appointmentCancelledCount?: IntWithAggregatesFilter | number
@@ -6502,6 +6470,7 @@ export namespace Prisma {
   export type AppointmentCreateInput = {
     datetimeFrom: Date | string
     datetimeTo: Date | string
+    totalHours: number
     user: UserCreateNestedOneWithoutAppointmentsInput
     calendarEventId: string
     status?: AppointmentStatus
@@ -6514,6 +6483,7 @@ export namespace Prisma {
     id?: number
     datetimeFrom: Date | string
     datetimeTo: Date | string
+    totalHours: number
     userEmail: string
     calendarEventId: string
     status?: AppointmentStatus
@@ -6525,6 +6495,7 @@ export namespace Prisma {
   export type AppointmentUpdateInput = {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalHours?: FloatFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutAppointmentsNestedInput
     calendarEventId?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | AppointmentStatus
@@ -6537,6 +6508,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalHours?: FloatFieldUpdateOperationsInput | number
     userEmail?: StringFieldUpdateOperationsInput | string
     calendarEventId?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | AppointmentStatus
@@ -6549,6 +6521,7 @@ export namespace Prisma {
     id?: number
     datetimeFrom: Date | string
     datetimeTo: Date | string
+    totalHours: number
     userEmail: string
     calendarEventId: string
     status?: AppointmentStatus
@@ -6559,6 +6532,7 @@ export namespace Prisma {
   export type AppointmentUpdateManyMutationInput = {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalHours?: FloatFieldUpdateOperationsInput | number
     calendarEventId?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | AppointmentStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6569,6 +6543,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalHours?: FloatFieldUpdateOperationsInput | number
     userEmail?: StringFieldUpdateOperationsInput | string
     calendarEventId?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | AppointmentStatus
@@ -6580,8 +6555,6 @@ export namespace Prisma {
     appointment: AppointmentCreateNestedOneWithoutAppointmentDetailInput
     comments?: string | null
     appointmentType: string
-    paidAmount?: number | null
-    paidDate?: Date | string | null
   }
 
   export type AppointmentDetailUncheckedCreateInput = {
@@ -6589,16 +6562,12 @@ export namespace Prisma {
     appointmentId: number
     comments?: string | null
     appointmentType: string
-    paidAmount?: number | null
-    paidDate?: Date | string | null
   }
 
   export type AppointmentDetailUpdateInput = {
     appointment?: AppointmentUpdateOneRequiredWithoutAppointmentDetailNestedInput
     comments?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentType?: StringFieldUpdateOperationsInput | string
-    paidAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    paidDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppointmentDetailUncheckedUpdateInput = {
@@ -6606,8 +6575,6 @@ export namespace Prisma {
     appointmentId?: IntFieldUpdateOperationsInput | number
     comments?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentType?: StringFieldUpdateOperationsInput | string
-    paidAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    paidDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppointmentDetailCreateManyInput = {
@@ -6615,15 +6582,11 @@ export namespace Prisma {
     appointmentId: number
     comments?: string | null
     appointmentType: string
-    paidAmount?: number | null
-    paidDate?: Date | string | null
   }
 
   export type AppointmentDetailUpdateManyMutationInput = {
     comments?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentType?: StringFieldUpdateOperationsInput | string
-    paidAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    paidDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppointmentDetailUncheckedUpdateManyInput = {
@@ -6631,8 +6594,6 @@ export namespace Prisma {
     appointmentId?: IntFieldUpdateOperationsInput | number
     comments?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentType?: StringFieldUpdateOperationsInput | string
-    paidAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    paidDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReportCreateInput = {
@@ -6640,7 +6601,6 @@ export namespace Prisma {
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
-    totalAmount: number
     totalHours: number
     totalAppointmentBooked: number
     totalAppointmentCancelled: number
@@ -6653,7 +6613,6 @@ export namespace Prisma {
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
-    totalAmount: number
     totalHours: number
     totalAppointmentBooked: number
     totalAppointmentCancelled: number
@@ -6665,7 +6624,6 @@ export namespace Prisma {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     totalAppointmentBooked?: IntFieldUpdateOperationsInput | number
     totalAppointmentCancelled?: IntFieldUpdateOperationsInput | number
@@ -6678,7 +6636,6 @@ export namespace Prisma {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     totalAppointmentBooked?: IntFieldUpdateOperationsInput | number
     totalAppointmentCancelled?: IntFieldUpdateOperationsInput | number
@@ -6691,7 +6648,6 @@ export namespace Prisma {
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
-    totalAmount: number
     totalHours: number
     totalAppointmentBooked: number
     totalAppointmentCancelled: number
@@ -6702,7 +6658,6 @@ export namespace Prisma {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     totalAppointmentBooked?: IntFieldUpdateOperationsInput | number
     totalAppointmentCancelled?: IntFieldUpdateOperationsInput | number
@@ -6714,7 +6669,6 @@ export namespace Prisma {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     totalAppointmentBooked?: IntFieldUpdateOperationsInput | number
     totalAppointmentCancelled?: IntFieldUpdateOperationsInput | number
@@ -6723,16 +6677,15 @@ export namespace Prisma {
   export type ReportUserCreateInput = {
     Report?: ReportCreateNestedOneWithoutReportUsersInput
     user: UserCreateNestedOneWithoutReportUserInput
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
   }
 
   export type ReportUserUncheckedCreateInput = {
+    id?: number
     reportId: number
     userEmail: string
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
@@ -6741,41 +6694,39 @@ export namespace Prisma {
   export type ReportUserUpdateInput = {
     Report?: ReportUpdateOneWithoutReportUsersNestedInput
     user?: UserUpdateOneRequiredWithoutReportUserNestedInput
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type ReportUserUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     reportId?: IntFieldUpdateOperationsInput | number
     userEmail?: StringFieldUpdateOperationsInput | string
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type ReportUserCreateManyInput = {
+    id?: number
     reportId: number
     userEmail: string
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
   }
 
   export type ReportUserUpdateManyMutationInput = {
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type ReportUserUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
     reportId?: IntFieldUpdateOperationsInput | number
     userEmail?: StringFieldUpdateOperationsInput | string
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number
@@ -6996,6 +6947,17 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter
   }
 
+  export type FloatFilter = {
+    equals?: number
+    in?: Enumerable<number>
+    notIn?: Enumerable<number>
+    lt?: number
+    lte?: number
+    gt?: number
+    gte?: number
+    not?: NestedFloatFilter | number
+  }
+
   export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -7017,6 +6979,7 @@ export namespace Prisma {
     id?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
+    totalHours?: SortOrder
     userEmail?: SortOrder
     calendarEventId?: SortOrder
     status?: SortOrder
@@ -7026,12 +6989,14 @@ export namespace Prisma {
 
   export type AppointmentAvgOrderByAggregateInput = {
     id?: SortOrder
+    totalHours?: SortOrder
   }
 
   export type AppointmentMaxOrderByAggregateInput = {
     id?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
+    totalHours?: SortOrder
     userEmail?: SortOrder
     calendarEventId?: SortOrder
     status?: SortOrder
@@ -7043,6 +7008,7 @@ export namespace Prisma {
     id?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
+    totalHours?: SortOrder
     userEmail?: SortOrder
     calendarEventId?: SortOrder
     status?: SortOrder
@@ -7052,177 +7018,7 @@ export namespace Prisma {
 
   export type AppointmentSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type EnumAppointmentStatusWithAggregatesFilter = {
-    equals?: AppointmentStatus
-    in?: Enumerable<AppointmentStatus>
-    notIn?: Enumerable<AppointmentStatus>
-    not?: NestedEnumAppointmentStatusWithAggregatesFilter | AppointmentStatus
-    _count?: NestedIntFilter
-    _min?: NestedEnumAppointmentStatusFilter
-    _max?: NestedEnumAppointmentStatusFilter
-  }
-
-  export type AppointmentRelationFilter = {
-    is?: AppointmentWhereInput
-    isNot?: AppointmentWhereInput
-  }
-
-  export type FloatNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatNullableFilter | number | null
-  }
-
-  export type DateTimeNullableFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | null
-    notIn?: Enumerable<Date> | Enumerable<string> | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeNullableFilter | Date | string | null
-  }
-
-  export type AppointmentDetailCountOrderByAggregateInput = {
-    id?: SortOrder
-    appointmentId?: SortOrder
-    comments?: SortOrder
-    appointmentType?: SortOrder
-    paidAmount?: SortOrder
-    paidDate?: SortOrder
-  }
-
-  export type AppointmentDetailAvgOrderByAggregateInput = {
-    id?: SortOrder
-    appointmentId?: SortOrder
-    paidAmount?: SortOrder
-  }
-
-  export type AppointmentDetailMaxOrderByAggregateInput = {
-    id?: SortOrder
-    appointmentId?: SortOrder
-    comments?: SortOrder
-    appointmentType?: SortOrder
-    paidAmount?: SortOrder
-    paidDate?: SortOrder
-  }
-
-  export type AppointmentDetailMinOrderByAggregateInput = {
-    id?: SortOrder
-    appointmentId?: SortOrder
-    comments?: SortOrder
-    appointmentType?: SortOrder
-    paidAmount?: SortOrder
-    paidDate?: SortOrder
-  }
-
-  export type AppointmentDetailSumOrderByAggregateInput = {
-    id?: SortOrder
-    appointmentId?: SortOrder
-    paidAmount?: SortOrder
-  }
-
-  export type FloatNullableWithAggregatesFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatNullableWithAggregatesFilter | number | null
-    _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedFloatNullableFilter
-    _min?: NestedFloatNullableFilter
-    _max?: NestedFloatNullableFilter
-  }
-
-  export type DateTimeNullableWithAggregatesFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | null
-    notIn?: Enumerable<Date> | Enumerable<string> | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeNullableWithAggregatesFilter | Date | string | null
-    _count?: NestedIntNullableFilter
-    _min?: NestedDateTimeNullableFilter
-    _max?: NestedDateTimeNullableFilter
-  }
-
-  export type FloatFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatFilter | number
-  }
-
-  export type ReportCountOrderByAggregateInput = {
-    id?: SortOrder
-    fileName?: SortOrder
-    datetimeFrom?: SortOrder
-    datetimeTo?: SortOrder
-    totalUsers?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
-    totalAppointmentBooked?: SortOrder
-    totalAppointmentCancelled?: SortOrder
-  }
-
-  export type ReportAvgOrderByAggregateInput = {
-    id?: SortOrder
-    totalUsers?: SortOrder
-    totalAmount?: SortOrder
-    totalHours?: SortOrder
-    totalAppointmentBooked?: SortOrder
-    totalAppointmentCancelled?: SortOrder
-  }
-
-  export type ReportMaxOrderByAggregateInput = {
-    id?: SortOrder
-    fileName?: SortOrder
-    datetimeFrom?: SortOrder
-    datetimeTo?: SortOrder
-    totalUsers?: SortOrder
-    totalAmount?: SortOrder
-    totalHours?: SortOrder
-    totalAppointmentBooked?: SortOrder
-    totalAppointmentCancelled?: SortOrder
-  }
-
-  export type ReportMinOrderByAggregateInput = {
-    id?: SortOrder
-    fileName?: SortOrder
-    datetimeFrom?: SortOrder
-    datetimeTo?: SortOrder
-    totalUsers?: SortOrder
-    totalAmount?: SortOrder
-    totalHours?: SortOrder
-    totalAppointmentBooked?: SortOrder
-    totalAppointmentCancelled?: SortOrder
-  }
-
-  export type ReportSumOrderByAggregateInput = {
-    id?: SortOrder
-    totalUsers?: SortOrder
-    totalAmount?: SortOrder
-    totalHours?: SortOrder
-    totalAppointmentBooked?: SortOrder
-    totalAppointmentCancelled?: SortOrder
   }
 
   export type FloatWithAggregatesFilter = {
@@ -7241,49 +7037,144 @@ export namespace Prisma {
     _max?: NestedFloatFilter
   }
 
+  export type EnumAppointmentStatusWithAggregatesFilter = {
+    equals?: AppointmentStatus
+    in?: Enumerable<AppointmentStatus>
+    notIn?: Enumerable<AppointmentStatus>
+    not?: NestedEnumAppointmentStatusWithAggregatesFilter | AppointmentStatus
+    _count?: NestedIntFilter
+    _min?: NestedEnumAppointmentStatusFilter
+    _max?: NestedEnumAppointmentStatusFilter
+  }
+
+  export type AppointmentRelationFilter = {
+    is?: AppointmentWhereInput
+    isNot?: AppointmentWhereInput
+  }
+
+  export type AppointmentDetailCountOrderByAggregateInput = {
+    id?: SortOrder
+    appointmentId?: SortOrder
+    comments?: SortOrder
+    appointmentType?: SortOrder
+  }
+
+  export type AppointmentDetailAvgOrderByAggregateInput = {
+    id?: SortOrder
+    appointmentId?: SortOrder
+  }
+
+  export type AppointmentDetailMaxOrderByAggregateInput = {
+    id?: SortOrder
+    appointmentId?: SortOrder
+    comments?: SortOrder
+    appointmentType?: SortOrder
+  }
+
+  export type AppointmentDetailMinOrderByAggregateInput = {
+    id?: SortOrder
+    appointmentId?: SortOrder
+    comments?: SortOrder
+    appointmentType?: SortOrder
+  }
+
+  export type AppointmentDetailSumOrderByAggregateInput = {
+    id?: SortOrder
+    appointmentId?: SortOrder
+  }
+
+  export type ReportCountOrderByAggregateInput = {
+    id?: SortOrder
+    fileName?: SortOrder
+    datetimeFrom?: SortOrder
+    datetimeTo?: SortOrder
+    totalUsers?: SortOrder
+    totalHours?: SortOrder
+    totalAppointmentBooked?: SortOrder
+    totalAppointmentCancelled?: SortOrder
+  }
+
+  export type ReportAvgOrderByAggregateInput = {
+    id?: SortOrder
+    totalUsers?: SortOrder
+    totalHours?: SortOrder
+    totalAppointmentBooked?: SortOrder
+    totalAppointmentCancelled?: SortOrder
+  }
+
+  export type ReportMaxOrderByAggregateInput = {
+    id?: SortOrder
+    fileName?: SortOrder
+    datetimeFrom?: SortOrder
+    datetimeTo?: SortOrder
+    totalUsers?: SortOrder
+    totalHours?: SortOrder
+    totalAppointmentBooked?: SortOrder
+    totalAppointmentCancelled?: SortOrder
+  }
+
+  export type ReportMinOrderByAggregateInput = {
+    id?: SortOrder
+    fileName?: SortOrder
+    datetimeFrom?: SortOrder
+    datetimeTo?: SortOrder
+    totalUsers?: SortOrder
+    totalHours?: SortOrder
+    totalAppointmentBooked?: SortOrder
+    totalAppointmentCancelled?: SortOrder
+  }
+
+  export type ReportSumOrderByAggregateInput = {
+    id?: SortOrder
+    totalUsers?: SortOrder
+    totalHours?: SortOrder
+    totalAppointmentBooked?: SortOrder
+    totalAppointmentCancelled?: SortOrder
+  }
+
   export type ReportRelationFilter = {
     is?: ReportWhereInput | null
     isNot?: ReportWhereInput | null
   }
 
   export type ReportUserCountOrderByAggregateInput = {
+    id?: SortOrder
     reportId?: SortOrder
     userEmail?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
     appointmentBookedCount?: SortOrder
     appointmentCancelledCount?: SortOrder
   }
 
   export type ReportUserAvgOrderByAggregateInput = {
+    id?: SortOrder
     reportId?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
     appointmentBookedCount?: SortOrder
     appointmentCancelledCount?: SortOrder
   }
 
   export type ReportUserMaxOrderByAggregateInput = {
+    id?: SortOrder
     reportId?: SortOrder
     userEmail?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
     appointmentBookedCount?: SortOrder
     appointmentCancelledCount?: SortOrder
   }
 
   export type ReportUserMinOrderByAggregateInput = {
+    id?: SortOrder
     reportId?: SortOrder
     userEmail?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
     appointmentBookedCount?: SortOrder
     appointmentCancelledCount?: SortOrder
   }
 
   export type ReportUserSumOrderByAggregateInput = {
+    id?: SortOrder
     reportId?: SortOrder
-    totalAmount?: SortOrder
     totalHours?: SortOrder
     appointmentBookedCount?: SortOrder
     appointmentCancelledCount?: SortOrder
@@ -7419,6 +7310,14 @@ export namespace Prisma {
     connect?: AppointmentDetailWhereUniqueInput
   }
 
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateOneRequiredWithoutAppointmentsNestedInput = {
     create?: XOR<UserCreateWithoutAppointmentsInput, UserUncheckedCreateWithoutAppointmentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAppointmentsInput
@@ -7465,18 +7364,6 @@ export namespace Prisma {
     update?: XOR<AppointmentUpdateWithoutAppointmentDetailInput, AppointmentUncheckedUpdateWithoutAppointmentDetailInput>
   }
 
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type ReportUserCreateNestedManyWithoutReportInput = {
     create?: XOR<Enumerable<ReportUserCreateWithoutReportInput>, Enumerable<ReportUserUncheckedCreateWithoutReportInput>>
     connectOrCreate?: Enumerable<ReportUserCreateOrConnectWithoutReportInput>
@@ -7489,14 +7376,6 @@ export namespace Prisma {
     connectOrCreate?: Enumerable<ReportUserCreateOrConnectWithoutReportInput>
     createMany?: ReportUserCreateManyReportInputEnvelope
     connect?: Enumerable<ReportUserWhereUniqueInput>
-  }
-
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type ReportUserUpdateManyWithoutReportNestedInput = {
@@ -7730,68 +7609,6 @@ export namespace Prisma {
     not?: NestedEnumAppointmentStatusFilter | AppointmentStatus
   }
 
-  export type NestedEnumAppointmentStatusWithAggregatesFilter = {
-    equals?: AppointmentStatus
-    in?: Enumerable<AppointmentStatus>
-    notIn?: Enumerable<AppointmentStatus>
-    not?: NestedEnumAppointmentStatusWithAggregatesFilter | AppointmentStatus
-    _count?: NestedIntFilter
-    _min?: NestedEnumAppointmentStatusFilter
-    _max?: NestedEnumAppointmentStatusFilter
-  }
-
-  export type NestedFloatNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatNullableFilter | number | null
-  }
-
-  export type NestedDateTimeNullableFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | null
-    notIn?: Enumerable<Date> | Enumerable<string> | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeNullableFilter | Date | string | null
-  }
-
-  export type NestedFloatNullableWithAggregatesFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
-    not?: NestedFloatNullableWithAggregatesFilter | number | null
-    _count?: NestedIntNullableFilter
-    _avg?: NestedFloatNullableFilter
-    _sum?: NestedFloatNullableFilter
-    _min?: NestedFloatNullableFilter
-    _max?: NestedFloatNullableFilter
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | null
-    notIn?: Enumerable<Date> | Enumerable<string> | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
-    not?: NestedDateTimeNullableWithAggregatesFilter | Date | string | null
-    _count?: NestedIntNullableFilter
-    _min?: NestedDateTimeNullableFilter
-    _max?: NestedDateTimeNullableFilter
-  }
-
   export type NestedFloatWithAggregatesFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -7808,9 +7625,20 @@ export namespace Prisma {
     _max?: NestedFloatFilter
   }
 
+  export type NestedEnumAppointmentStatusWithAggregatesFilter = {
+    equals?: AppointmentStatus
+    in?: Enumerable<AppointmentStatus>
+    notIn?: Enumerable<AppointmentStatus>
+    not?: NestedEnumAppointmentStatusWithAggregatesFilter | AppointmentStatus
+    _count?: NestedIntFilter
+    _min?: NestedEnumAppointmentStatusFilter
+    _max?: NestedEnumAppointmentStatusFilter
+  }
+
   export type AppointmentCreateWithoutUserInput = {
     datetimeFrom: Date | string
     datetimeTo: Date | string
+    totalHours: number
     calendarEventId: string
     status?: AppointmentStatus
     createdAt?: Date | string
@@ -7822,6 +7650,7 @@ export namespace Prisma {
     id?: number
     datetimeFrom: Date | string
     datetimeTo: Date | string
+    totalHours: number
     calendarEventId: string
     status?: AppointmentStatus
     createdAt?: Date | string
@@ -7841,15 +7670,14 @@ export namespace Prisma {
 
   export type ReportUserCreateWithoutUserInput = {
     Report?: ReportCreateNestedOneWithoutReportUsersInput
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
   }
 
   export type ReportUserUncheckedCreateWithoutUserInput = {
+    id?: number
     reportId: number
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
@@ -7888,6 +7716,7 @@ export namespace Prisma {
     id?: IntFilter | number
     datetimeFrom?: DateTimeFilter | Date | string
     datetimeTo?: DateTimeFilter | Date | string
+    totalHours?: FloatFilter | number
     userEmail?: StringFilter | string
     calendarEventId?: StringFilter | string
     status?: EnumAppointmentStatusFilter | AppointmentStatus
@@ -7915,9 +7744,9 @@ export namespace Prisma {
     AND?: Enumerable<ReportUserScalarWhereInput>
     OR?: Enumerable<ReportUserScalarWhereInput>
     NOT?: Enumerable<ReportUserScalarWhereInput>
+    id?: IntFilter | number
     reportId?: IntFilter | number
     userEmail?: StringFilter | string
-    totalAmount?: FloatFilter | number
     totalHours?: FloatFilter | number
     appointmentBookedCount?: IntFilter | number
     appointmentCancelledCount?: IntFilter | number
@@ -7958,16 +7787,12 @@ export namespace Prisma {
   export type AppointmentDetailCreateWithoutAppointmentInput = {
     comments?: string | null
     appointmentType: string
-    paidAmount?: number | null
-    paidDate?: Date | string | null
   }
 
   export type AppointmentDetailUncheckedCreateWithoutAppointmentInput = {
     id?: number
     comments?: string | null
     appointmentType: string
-    paidAmount?: number | null
-    paidDate?: Date | string | null
   }
 
   export type AppointmentDetailCreateOrConnectWithoutAppointmentInput = {
@@ -8015,21 +7840,18 @@ export namespace Prisma {
   export type AppointmentDetailUpdateWithoutAppointmentInput = {
     comments?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentType?: StringFieldUpdateOperationsInput | string
-    paidAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    paidDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppointmentDetailUncheckedUpdateWithoutAppointmentInput = {
     id?: IntFieldUpdateOperationsInput | number
     comments?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentType?: StringFieldUpdateOperationsInput | string
-    paidAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    paidDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AppointmentCreateWithoutAppointmentDetailInput = {
     datetimeFrom: Date | string
     datetimeTo: Date | string
+    totalHours: number
     user: UserCreateNestedOneWithoutAppointmentsInput
     calendarEventId: string
     status?: AppointmentStatus
@@ -8041,6 +7863,7 @@ export namespace Prisma {
     id?: number
     datetimeFrom: Date | string
     datetimeTo: Date | string
+    totalHours: number
     userEmail: string
     calendarEventId: string
     status?: AppointmentStatus
@@ -8061,6 +7884,7 @@ export namespace Prisma {
   export type AppointmentUpdateWithoutAppointmentDetailInput = {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalHours?: FloatFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutAppointmentsNestedInput
     calendarEventId?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | AppointmentStatus
@@ -8072,6 +7896,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalHours?: FloatFieldUpdateOperationsInput | number
     userEmail?: StringFieldUpdateOperationsInput | string
     calendarEventId?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | AppointmentStatus
@@ -8081,15 +7906,14 @@ export namespace Prisma {
 
   export type ReportUserCreateWithoutReportInput = {
     user: UserCreateNestedOneWithoutReportUserInput
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
   }
 
   export type ReportUserUncheckedCreateWithoutReportInput = {
+    id?: number
     userEmail: string
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
@@ -8126,7 +7950,6 @@ export namespace Prisma {
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
-    totalAmount: number
     totalHours: number
     totalAppointmentBooked: number
     totalAppointmentCancelled: number
@@ -8138,7 +7961,6 @@ export namespace Prisma {
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
-    totalAmount: number
     totalHours: number
     totalAppointmentBooked: number
     totalAppointmentCancelled: number
@@ -8191,7 +8013,6 @@ export namespace Prisma {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     totalAppointmentBooked?: IntFieldUpdateOperationsInput | number
     totalAppointmentCancelled?: IntFieldUpdateOperationsInput | number
@@ -8203,7 +8024,6 @@ export namespace Prisma {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     totalAppointmentBooked?: IntFieldUpdateOperationsInput | number
     totalAppointmentCancelled?: IntFieldUpdateOperationsInput | number
@@ -8245,6 +8065,7 @@ export namespace Prisma {
     id?: number
     datetimeFrom: Date | string
     datetimeTo: Date | string
+    totalHours: number
     calendarEventId: string
     status?: AppointmentStatus
     createdAt?: Date | string
@@ -8252,8 +8073,8 @@ export namespace Prisma {
   }
 
   export type ReportUserCreateManyUserInput = {
+    id?: number
     reportId: number
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
@@ -8262,6 +8083,7 @@ export namespace Prisma {
   export type AppointmentUpdateWithoutUserInput = {
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalHours?: FloatFieldUpdateOperationsInput | number
     calendarEventId?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | AppointmentStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8273,6 +8095,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalHours?: FloatFieldUpdateOperationsInput | number
     calendarEventId?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | AppointmentStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8284,6 +8107,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    totalHours?: FloatFieldUpdateOperationsInput | number
     calendarEventId?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | AppointmentStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8292,31 +8116,30 @@ export namespace Prisma {
 
   export type ReportUserUpdateWithoutUserInput = {
     Report?: ReportUpdateOneWithoutReportUsersNestedInput
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type ReportUserUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
     reportId?: IntFieldUpdateOperationsInput | number
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type ReportUserUncheckedUpdateManyWithoutReportUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
     reportId?: IntFieldUpdateOperationsInput | number
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type ReportUserCreateManyReportInput = {
+    id?: number
     userEmail: string
-    totalAmount: number
     totalHours: number
     appointmentBookedCount: number
     appointmentCancelledCount: number
@@ -8324,23 +8147,22 @@ export namespace Prisma {
 
   export type ReportUserUpdateWithoutReportInput = {
     user?: UserUpdateOneRequiredWithoutReportUserNestedInput
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type ReportUserUncheckedUpdateWithoutReportInput = {
+    id?: IntFieldUpdateOperationsInput | number
     userEmail?: StringFieldUpdateOperationsInput | string
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number
   }
 
   export type ReportUserUncheckedUpdateManyWithoutReportUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
     userEmail?: StringFieldUpdateOperationsInput | string
-    totalAmount?: FloatFieldUpdateOperationsInput | number
     totalHours?: FloatFieldUpdateOperationsInput | number
     appointmentBookedCount?: IntFieldUpdateOperationsInput | number
     appointmentCancelledCount?: IntFieldUpdateOperationsInput | number

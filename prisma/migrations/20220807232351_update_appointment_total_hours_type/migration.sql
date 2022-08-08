@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Appointment" ALTER COLUMN "totalHours" SET DATA TYPE DOUBLE PRECISION;

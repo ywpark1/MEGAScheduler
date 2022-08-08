@@ -6,6 +6,7 @@ import {
   GET,
   Inject,
   POST,
+  PUT,
 } from "fastify-decorators";
 import { getLogger, Logger, LogLevel } from "../../log/logger";
 import { getFormattedDate } from "../../utils/datetime";
@@ -22,6 +23,13 @@ export type CreateAppointmentBody = FastifyRequest<{
 export type FindAppointmentParam = FastifyRequest<{
   Params: {
     appointmentId: number;
+  };
+}>;
+
+export type UpdateAppointmentStatusParam = FastifyRequest<{
+  Params: {
+    appointmentId: number;
+    status: string;
   };
 }>;
 
@@ -126,6 +134,18 @@ export default class AppointmentController {
   ) {
     const appointments = await this._appointmentService.findAppointment(
       Number(request.params.appointmentId)
+    );
+    return appointments;
+  }
+
+  @PUT("/:appointmentId/status/:status")
+  public async updateAppointment(
+    request: UpdateAppointmentStatusParam,
+    reply: FastifyReply
+  ) {
+    const appointments = await this._appointmentService.updateAppointmentStatus(
+      Number(request.params.appointmentId),
+      request.params.status
     );
     return appointments;
   }
