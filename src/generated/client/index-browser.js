@@ -117,7 +117,6 @@ exports.Prisma.AppointmentDetailScalarFieldEnum = makeEnum({
 
 exports.Prisma.ReportScalarFieldEnum = makeEnum({
   id: 'id',
-  fileName: 'fileName',
   datetimeFrom: 'datetimeFrom',
   datetimeTo: 'datetimeTo',
   totalUsers: 'totalUsers',

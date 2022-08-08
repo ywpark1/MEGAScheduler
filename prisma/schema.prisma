@@ -61,7 +61,6 @@ model AppointmentDetail {
 
 model Report {
   id                        Int          @id @default(autoincrement())
-  fileName                  String
   datetimeFrom              DateTime
   datetimeTo                DateTime
   totalUsers                Int

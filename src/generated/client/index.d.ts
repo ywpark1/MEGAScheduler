@@ -62,7 +62,6 @@ export type AppointmentDetail = {
  */
 export type Report = {
   id: number
-  fileName: string
   datetimeFrom: Date
   datetimeTo: Date
   totalUsers: number
@@ -4019,7 +4018,6 @@ export namespace Prisma {
 
   export type ReportMinAggregateOutputType = {
     id: number | null
-    fileName: string | null
     datetimeFrom: Date | null
     datetimeTo: Date | null
     totalUsers: number | null
@@ -4030,7 +4028,6 @@ export namespace Prisma {
 
   export type ReportMaxAggregateOutputType = {
     id: number | null
-    fileName: string | null
     datetimeFrom: Date | null
     datetimeTo: Date | null
     totalUsers: number | null
@@ -4041,7 +4038,6 @@ export namespace Prisma {
 
   export type ReportCountAggregateOutputType = {
     id: number
-    fileName: number
     datetimeFrom: number
     datetimeTo: number
     totalUsers: number
@@ -4070,7 +4066,6 @@ export namespace Prisma {
 
   export type ReportMinAggregateInputType = {
     id?: true
-    fileName?: true
     datetimeFrom?: true
     datetimeTo?: true
     totalUsers?: true
@@ -4081,7 +4076,6 @@ export namespace Prisma {
 
   export type ReportMaxAggregateInputType = {
     id?: true
-    fileName?: true
     datetimeFrom?: true
     datetimeTo?: true
     totalUsers?: true
@@ -4092,7 +4086,6 @@ export namespace Prisma {
 
   export type ReportCountAggregateInputType = {
     id?: true
-    fileName?: true
     datetimeFrom?: true
     datetimeTo?: true
     totalUsers?: true
@@ -4196,7 +4189,6 @@ export namespace Prisma {
 
   export type ReportGroupByOutputType = {
     id: number
-    fileName: string
     datetimeFrom: Date
     datetimeTo: Date
     totalUsers: number
@@ -4226,7 +4218,6 @@ export namespace Prisma {
 
   export type ReportSelect = {
     id?: boolean
-    fileName?: boolean
     datetimeFrom?: boolean
     datetimeTo?: boolean
     totalUsers?: boolean
@@ -6024,7 +6015,6 @@ export namespace Prisma {
 
   export const ReportScalarFieldEnum: {
     id: 'id',
-    fileName: 'fileName',
     datetimeFrom: 'datetimeFrom',
     datetimeTo: 'datetimeTo',
     totalUsers: 'totalUsers',
@@ -6260,7 +6250,6 @@ export namespace Prisma {
     OR?: Enumerable<ReportWhereInput>
     NOT?: Enumerable<ReportWhereInput>
     id?: IntFilter | number
-    fileName?: StringFilter | string
     datetimeFrom?: DateTimeFilter | Date | string
     datetimeTo?: DateTimeFilter | Date | string
     totalUsers?: IntFilter | number
@@ -6272,7 +6261,6 @@ export namespace Prisma {
 
   export type ReportOrderByWithRelationInput = {
     id?: SortOrder
-    fileName?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
     totalUsers?: SortOrder
@@ -6288,7 +6276,6 @@ export namespace Prisma {
 
   export type ReportOrderByWithAggregationInput = {
     id?: SortOrder
-    fileName?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
     totalUsers?: SortOrder
@@ -6307,7 +6294,6 @@ export namespace Prisma {
     OR?: Enumerable<ReportScalarWhereWithAggregatesInput>
     NOT?: Enumerable<ReportScalarWhereWithAggregatesInput>
     id?: IntWithAggregatesFilter | number
-    fileName?: StringWithAggregatesFilter | string
     datetimeFrom?: DateTimeWithAggregatesFilter | Date | string
     datetimeTo?: DateTimeWithAggregatesFilter | Date | string
     totalUsers?: IntWithAggregatesFilter | number
@@ -6597,7 +6583,6 @@ export namespace Prisma {
   }
 
   export type ReportCreateInput = {
-    fileName: string
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
@@ -6609,7 +6594,6 @@ export namespace Prisma {
 
   export type ReportUncheckedCreateInput = {
     id?: number
-    fileName: string
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
@@ -6620,7 +6604,6 @@ export namespace Prisma {
   }
 
   export type ReportUpdateInput = {
-    fileName?: StringFieldUpdateOperationsInput | string
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
@@ -6632,7 +6615,6 @@ export namespace Prisma {
 
   export type ReportUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    fileName?: StringFieldUpdateOperationsInput | string
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
@@ -6644,7 +6626,6 @@ export namespace Prisma {
 
   export type ReportCreateManyInput = {
     id?: number
-    fileName: string
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
@@ -6654,7 +6635,6 @@ export namespace Prisma {
   }
 
   export type ReportUpdateManyMutationInput = {
-    fileName?: StringFieldUpdateOperationsInput | string
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
@@ -6665,7 +6645,6 @@ export namespace Prisma {
 
   export type ReportUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    fileName?: StringFieldUpdateOperationsInput | string
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
@@ -7085,7 +7064,6 @@ export namespace Prisma {
 
   export type ReportCountOrderByAggregateInput = {
     id?: SortOrder
-    fileName?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
     totalUsers?: SortOrder
@@ -7104,7 +7082,6 @@ export namespace Prisma {
 
   export type ReportMaxOrderByAggregateInput = {
     id?: SortOrder
-    fileName?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
     totalUsers?: SortOrder
@@ -7115,7 +7092,6 @@ export namespace Prisma {
 
   export type ReportMinOrderByAggregateInput = {
     id?: SortOrder
-    fileName?: SortOrder
     datetimeFrom?: SortOrder
     datetimeTo?: SortOrder
     totalUsers?: SortOrder
@@ -7946,7 +7922,6 @@ export namespace Prisma {
   }
 
   export type ReportCreateWithoutReportUsersInput = {
-    fileName: string
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
@@ -7957,7 +7932,6 @@ export namespace Prisma {
 
   export type ReportUncheckedCreateWithoutReportUsersInput = {
     id?: number
-    fileName: string
     datetimeFrom: Date | string
     datetimeTo: Date | string
     totalUsers: number
@@ -8009,7 +7983,6 @@ export namespace Prisma {
   }
 
   export type ReportUpdateWithoutReportUsersInput = {
-    fileName?: StringFieldUpdateOperationsInput | string
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
@@ -8020,7 +7993,6 @@ export namespace Prisma {
 
   export type ReportUncheckedUpdateWithoutReportUsersInput = {
     id?: IntFieldUpdateOperationsInput | number
-    fileName?: StringFieldUpdateOperationsInput | string
     datetimeFrom?: DateTimeFieldUpdateOperationsInput | Date | string
     datetimeTo?: DateTimeFieldUpdateOperationsInput | Date | string
     totalUsers?: IntFieldUpdateOperationsInput | number
