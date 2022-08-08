@@ -78,7 +78,7 @@ export default class AppointmentController {
         datetimeTo,
       };
 
-      this.logger.message(`${JSON.stringify(logMessage)}`, LogLevel.INFO);
+      this.logger.message(`${JSON.stringify(logMessage)}`, LogLevel.WARN);
       return reply
         .code(400)
         .send(
@@ -109,12 +109,17 @@ export default class AppointmentController {
     );
 
     if (newEvent && newEvent.id) {
+      this.logger.message(`New Event id: ${newEvent.id}`, LogLevel.INFO);
       try {
         const appointment = await this._appointmentService.createNewAppointment(
           request.body,
           newEvent.id
         );
         if (appointment) {
+          this.logger.message(
+            `New Appointment: ${JSON.stringify(appointment)}`,
+            LogLevel.INFO
+          );
           return reply.code(201).send(appointment);
         }
       } catch (error: any) {
@@ -135,6 +140,13 @@ export default class AppointmentController {
     const appointments = await this._appointmentService.findAppointment(
       Number(request.params.appointmentId)
     );
+    this.logger.message(
+      `Find Appointment id ${request.params.appointmentId}: ${JSON.stringify(
+        appointments
+      )}`,
+      LogLevel.INFO
+    );
+
     return appointments;
   }
 
@@ -147,6 +159,12 @@ export default class AppointmentController {
       Number(request.params.appointmentId),
       request.params.status
     );
+    this.logger.message(
+      `Update Appointment id ${request.params.appointmentId}: ${JSON.stringify(
+        appointments
+      )}`,
+      LogLevel.INFO
+    );
     return appointments;
   }
 
@@ -157,6 +175,12 @@ export default class AppointmentController {
   ) {
     const appointment = await this._appointmentService.cancelAppointment(
       Number(request.params.appointmentId)
+    );
+    this.logger.message(
+      `Delete Appointment id ${request.params.appointmentId}: ${JSON.stringify(
+        appointment
+      )}`,
+      LogLevel.INFO
     );
     if (appointment && appointment.message) {
       this.logger.message(
@@ -172,6 +196,11 @@ export default class AppointmentController {
         calendarId,
         appointment.calendarEventId
       );
+      this.logger.message(
+        `Delete Event in Google Calendar ${appointment.calendarEventId}`,
+        LogLevel.INFO
+      );
+
       return reply
         .code(204)
         .send({ message: "Successfully deleted the event" });

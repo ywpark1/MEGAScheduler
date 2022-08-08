@@ -1,3 +1,5 @@
+import * as fs from "fs";
+
 export enum LogLevel {
   INFO = "INFO",
   DEBUG = "DEBUG",
@@ -46,8 +48,20 @@ class FileLogger extends Logger {
     return this._instance || (this._instance = new this());
   }
   public write_message(msg: string, logLevel: LogLevel) {
-    console.log(
-      `${new Date().toISOString()} - FileLogger => [${logLevel}] ${msg}`
+    fs.appendFile(
+      "log.txt",
+      `${new Date().toISOString()} - FileLogger => [${logLevel}] ${msg}`,
+      (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          // Get the file contents after the append operation
+          console.log(
+            "\nFile Contents of file after append:",
+            fs.readFileSync("log.txt", "utf8")
+          );
+        }
+      }
     );
   }
 }
